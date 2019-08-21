@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Emotion Experiment Starting page</title>
+    <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
+    <script src="airtable.browser.js"></script>
+</head>
+<body>
+    <!-- Navbar start  -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="title is-2 navbar-item" href="#">
+            Emotion Experiment            
+          </a>
+        </div>
+    </nav>
+    <!-- Navbar end  -->
+    <section class="hero is-link is-fullheight-with-navbar">
+        <div class="hero-body">
+          <div class="container">
+            <p class="title">
+              About the Experiment:
+            </p>
+
+              <font size="4.5">Human Emotion is a big riddle engaging psychologists and neuroscientists to measure and analyze it with contemporary cutting-edge tools. However, still community is struggling to agree on some definition of emotion. In addition, most of the research on emotions is representing the western societies. Although in the past there were some experiments with cross-cultural sampling, the south asian culture(specially India) is not much explored. Largely the research is based on pictures of faces which has low ecological validity. This online survey is an attempt to create a stimulus dataset which is suitable for native Indian population. Once analyzed and made publicly available this stimulus dataset can be used by many researchers nationally as well as internationally(on indian population). This presentation is made possible with the beautiful effort of undergraduate and postgraduate students and excellent mentor and experts.</font>
+              
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <p class="title">
+              Enter your details
+            </p>
+            <div class="field">
+                <label class="label has-text-white">Name</label>
+                <div class="control">
+                  <input class="input" id="name" type="text" placeholder="Enter your name">
+                </div>
+              </div>
+              <div class="field">
+                <label class="label has-text-white">Roll number</label>
+                <div class="control">
+                  <input class="input" id="rollno" type="text" placeholder="Enter your roll number">
+                </div>
+              </div>
+              <div class="control">
+                <button id="submit" class="button is-info">Submit</button>
+              </div>
+          </div>
+        </div>
+    </section>
+
+</body>
+<script>
+var Airtable = require('airtable');
+// Get a base ID for an instance of art gallery example
+var base = new Airtable({ apiKey: 'keyohoRKRtvuB9AvU' }).base('appiFmHtdP6Hf3mMf');
+$('#submit').click(function(){
+    var name=document.getElementById("name").value;
+    var rollno=document.getElementById("rollno").value;
+    var seen=[];
+   base('dataset').create({
+  "Name": name,
+  "rollno": rollno
+}, function(err, record) {
+    if (err) { console.error(err); return; }
+    console.log(record.getId());
+    localStorage.setItem("recordid", record.getId());
+    localStorage.setItem("count",0);
+    localStorage.setItem("seen",JSON.stringify(seen));
+    window.location.href = "instructions.html";    
+    });
+});
+
+
+</script>
+</html>
+
+<!-- window.location.href ="https://aswanthkoleri.github.io/EEG-Testing-App/instructions.html"; -->
