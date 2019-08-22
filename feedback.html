@@ -447,7 +447,7 @@ $('#submit').click(function(){
 }, function(err, record) {
     if (err) { console.error(err); return; }
     console.log("Done");
-    window.location.href ="view.html";
+    window.location.href ="finish.html";
     });
     }
     else if(count == 6){
@@ -877,7 +877,7 @@ $('#submit').click(function(){
     }
 
 });
-if(count > 10){
+if(count > 5){
     $("#finish").removeAttr('disabled');
     $("#finish").click(function(){
         var recordId = localStorage.getItem("recordid");
